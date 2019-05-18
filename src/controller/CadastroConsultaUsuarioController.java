@@ -18,13 +18,13 @@ public class CadastroConsultaUsuarioController {
     private UsuarioService usuarioService = new UsuarioService();
 
     @FXML
+    private Tab tabCadastrarUsuario;
+
+    @FXML
     private PasswordField txtSenha;
 
     @FXML
     private TextField txtPesquisaUsuario;
-
-    @FXML
-    private Tab tabConsultaUsuario;
 
     @FXML
     private TabPane paneUsuario;
@@ -33,7 +33,7 @@ public class CadastroConsultaUsuarioController {
     private TextField txtTelefone;
 
     @FXML
-    private Button btnPesquisa;
+    private Tab tabConsultarUsuario;
 
     @FXML
     private TextField txtCPF;
@@ -42,16 +42,19 @@ public class CadastroConsultaUsuarioController {
     private Button btnCadastrarUsuario;
 
     @FXML
-    private TableView<?> tableListaUsuario;
+    private Button btnPesquisar;
 
     @FXML
-    private Tab tabCadastraUsuario;
+    private TextField txtLogin;
+
+    @FXML
+    private TableView<?> tableListaUsuario;
 
     @FXML
     private TextField txtNomeUsuario;
 
     @FXML
-    private Button btnAtualizaUsuario;
+    private Button btnAtualizarUsuario;
 
     @FXML
     private TextField txtEnderecoUsuario;
@@ -63,13 +66,10 @@ public class CadastroConsultaUsuarioController {
     private Button btnVoltar;
 
     @FXML
-    private TextField txtLogin;
-
-    @FXML
     private AnchorPane paneConsultaUsuario;
 
     @FXML
-    void handleClickCadastraUsuario(ActionEvent event) {
+    void handleClickCadastrarUsuario(ActionEvent event) {
         final String nome = txtNomeUsuario.getText();
         final String endereco = txtEnderecoUsuario.getText();
         final String cpf = txtCPF.getText();
@@ -83,12 +83,12 @@ public class CadastroConsultaUsuarioController {
     }
 
     @FXML
-    void handleClickExcluiUsuario(ActionEvent event) {
+    void handleClickExcluirUsuario(ActionEvent event) {
 
     }
 
     @FXML
-    void handleClickAtualizaUsuario(ActionEvent event) {
+    void handleClickAtualizarUsuario(ActionEvent event) {
 
     }
 
@@ -98,7 +98,7 @@ public class CadastroConsultaUsuarioController {
     }
 
     @FXML
-    void handleClickVoltaMenu(ActionEvent event) {
+    void handleClickVoltarMenu(ActionEvent event) {
         try {
             Pane menuPrincipal = FXMLLoader.load(getClass().getResource("../view/TelaMenuPrincipal.fxml"));
             // Fecha janela anterior
@@ -114,4 +114,5 @@ public class CadastroConsultaUsuarioController {
             e.printStackTrace();
         }
     }
+
 }

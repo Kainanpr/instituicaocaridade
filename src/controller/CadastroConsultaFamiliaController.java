@@ -19,13 +19,13 @@ public class CadastroConsultaFamiliaController {
     private TextField txtEndereco;
 
     @FXML
+    private Tab tabConsultarBeneficiado;
+
+    @FXML
     private TabPane paneBeneficiado;
 
     @FXML
     private TextField txtTelefone;
-
-    @FXML
-    private Button btnPesquisa;
 
     @FXML
     private TextArea txtDescricao;
@@ -35,6 +35,12 @@ public class CadastroConsultaFamiliaController {
 
     @FXML
     private TextField txtNumero;
+
+    @FXML
+    private Button btnAtualizarBeneficiado;
+
+    @FXML
+    private Button btnPesquisar;
 
     @FXML
     private TextField txtNomeBeneficiado;
@@ -55,22 +61,19 @@ public class CadastroConsultaFamiliaController {
     private TableView<?> tableListaBeneficiado;
 
     @FXML
+    private Tab tabHistoricoCestas;
+
+    @FXML
     private TextField txtCidade;
-
-    @FXML
-    private Button btnAtualizaBeneficiado;
-
-    @FXML
-    private Tab tabCadastraBeneficiado;
 
     @FXML
     private Button btnHistoricoBeneficiado;
 
     @FXML
-    private TextField txtBairro;
+    private Tab tabCadastrarBeneficiado;
 
     @FXML
-    private Tab tabConsultaBeneficiado;
+    private TextField txtBairro;
 
 
     @FXML
@@ -80,17 +83,17 @@ public class CadastroConsultaFamiliaController {
 
 
     @FXML
-    void handleClickExcluiBeneficiado(ActionEvent event) {
+    void handleClickExcluirBeneficiado(ActionEvent event) {
 
     }
 
     @FXML
-    void handleClickAtualizaBeneficiado(ActionEvent event) {
+    void handleClickAtualizarBeneficiado(ActionEvent event) {
 
     }
 
     @FXML
-    void handleClickPesquisaBeneficiado(ActionEvent event) {
+    void handleClickPesquisarBeneficiado(ActionEvent event) {
 
     }
 
@@ -100,7 +103,7 @@ public class CadastroConsultaFamiliaController {
     }
 
     @FXML
-    void handleClickVoltaMenu(ActionEvent event) {
+    void handleClickVoltarMenu(ActionEvent event) {
         try {
             Pane menuPrincipal = FXMLLoader.load(getClass().getResource("../view/TelaMenuPrincipal.fxml"));
             // Fecha janela anterior
@@ -116,4 +119,5 @@ public class CadastroConsultaFamiliaController {
             e.printStackTrace();
         }
     }
+
 }

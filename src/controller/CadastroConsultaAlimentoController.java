@@ -28,16 +28,10 @@ public class CadastroConsultaAlimentoController {
     private TextField txtTipo;
 
     @FXML
-    private Button btnPesquisaEstoque;
-
-    @FXML
-    private Button btnVoltar;
+    private Tab tabEstoque;
 
     @FXML
     private TableView<?> tableValidade;
-
-    @FXML
-    private Tab tableEstoque;
 
     @FXML
     private TextField txtPesquisaUsuario1;
@@ -45,6 +39,17 @@ public class CadastroConsultaAlimentoController {
     @FXML
     private DatePicker dataValidade;
 
+    @FXML
+    private Button btnVoltar;
+
+    @FXML
+    private Button btnPesquisarEstoque;
+
+    @FXML
+    private Tab tabValidadesProximas;
+
+    @FXML
+    private Tab tabCadastrarAlimento;
 
     @FXML
     void handleClickAdicionarAlimento(ActionEvent event) {
@@ -52,12 +57,12 @@ public class CadastroConsultaAlimentoController {
     }
 
     @FXML
-    void handleClickPesquisaEstoque(ActionEvent event) {
+    void handleClickPesquisarEstoque(ActionEvent event) {
 
     }
 
     @FXML
-    void handleClickVoltaMenu(ActionEvent event) {
+    void handleClickVoltarMenu(ActionEvent event) {
         try {
             Pane menuPrincipal = FXMLLoader.load(getClass().getResource("../view/TelaMenuPrincipal.fxml"));
             // Fecha janela anterior

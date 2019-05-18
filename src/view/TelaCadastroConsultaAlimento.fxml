@@ -1,68 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="528.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.CadastroConsultaAlimentoController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="528.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadastroConsultaAlimentoController">
     <children>
         <TabPane layoutY="-2.0" prefHeight="394.0" prefWidth="528.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab text="Cadastrar Alimento">
+                <Tab fx:id="tabCadastrarAlimento" text="Cadastrar Alimento">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="249.0" prefWidth="381.0">
                             <children>
-                                <Label layoutX="52.0" layoutY="243.0"/>
-                                <Label layoutX="34.0" layoutY="28.0" text="Nome do Alimento"/>
-                                <Label layoutX="127.0" layoutY="109.0" text="Tipo"/>
-                                <TextField fx:id="txtNomeAlimento" layoutX="170.0" layoutY="23.0" prefHeight="26.0"
-                                           prefWidth="270.0"/>
-                                <DatePicker fx:id="dataValidade" layoutX="170.0" layoutY="61.0"/>
-                                <Label layoutX="38.0" layoutY="66.0" text="Data de Validade"/>
-                                <TableView fx:id="tableAlimento" layoutX="19.0" layoutY="192.0" prefHeight="120.0"
-                                           prefWidth="491.0"/>
-                                <Button fx:id="btnAdicionarAlimento" layoutX="338.0" layoutY="155.0"
-                                        mnemonicParsing="false" onAction="#handleClickAdicionarAlimento"
-                                        text="Adicionar Alimento"/>
-                                <TextField fx:id="txtTipo" layoutX="170.0" layoutY="104.0"/>
-                                <Button fx:id="btnVoltar" layoutX="449.0" layoutY="327.0" mnemonicParsing="false"
-                                        onAction="#handleClickVoltaMenu" text="Voltar"/>
+                                <Label layoutX="52.0" layoutY="243.0" />
+                                <Label layoutX="34.0" layoutY="28.0" text="Nome do Alimento" />
+                                <Label layoutX="127.0" layoutY="109.0" text="Tipo" />
+                                <TextField fx:id="txtNomeAlimento" layoutX="170.0" layoutY="23.0" prefHeight="26.0" prefWidth="270.0" />
+                                <DatePicker fx:id="dataValidade" layoutX="170.0" layoutY="61.0" />
+                                <Label layoutX="38.0" layoutY="66.0" text="Data de Validade" />
+                                <TableView fx:id="tableAlimento" layoutX="19.0" layoutY="192.0" prefHeight="120.0" prefWidth="491.0" />
+                                <Button fx:id="btnAdicionarAlimento" layoutX="338.0" layoutY="155.0" mnemonicParsing="false" onAction="#handleClickAdicionarAlimento" text="Adicionar Alimento" />
+                                <TextField fx:id="txtTipo" layoutX="170.0" layoutY="104.0" />
+                                <Button fx:id="btnVoltar" layoutX="449.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleClickVoltarMenu" text="Voltar" />
                             </children>
                             <effect>
-                                <Blend/>
+                                <Blend />
                             </effect>
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Validades Próximas">
+                <Tab fx:id="tabValidadesProximas" text="Validades Próximas">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="273.0" prefWidth="497.0">
                             <children>
-                                <Button fx:id="btnVoltar" layoutX="414.0" layoutY="321.0" mnemonicParsing="false"
-                                        onAction="#handleClickVoltaMenu" prefHeight="25.0" prefWidth="100.0"
-                                        text="Voltar"/>
-                                <TableView fx:id="tableValidade" layoutX="11.0" layoutY="14.0" prefHeight="295.0"
-                                           prefWidth="507.0"/>
+                                <Button fx:id="btnVoltar" layoutX="414.0" layoutY="321.0" mnemonicParsing="false" onAction="#handleClickVoltarMenu" prefHeight="25.0" prefWidth="100.0" text="Voltar" />
+                                <TableView fx:id="tableValidade" layoutX="11.0" layoutY="14.0" prefHeight="295.0" prefWidth="507.0" />
                             </children>
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab fx:id="tableEstoque" text="Estoque">
+                <Tab fx:id="tabEstoque" text="Estoque">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="273.0" prefWidth="497.0">
                             <children>
-                                <Button fx:id="btnVoltar" layoutX="401.0" layoutY="321.0" mnemonicParsing="false"
-                                        onAction="#handleClickVoltaMenu" prefHeight="26.0" prefWidth="100.0"
-                                        text="Voltar"/>
-                                <Label layoutX="14.0" layoutY="31.0" text="Tipo do Alimento"/>
-                                <TextField fx:id="txtPesquisaUsuario1" layoutX="140.0" layoutY="26.0" prefHeight="26.0"
-                                           prefWidth="253.0"/>
-                                <Button fx:id="btnPesquisaEstoque" layoutX="420.0" layoutY="26.0"
-                                        mnemonicParsing="false" onAction="#handleClickPesquisaEstoque"
-                                        text="Pesquisar"/>
-                                <TableView fx:id="tableEstoqueAlimentos" layoutX="11.0" layoutY="81.0"
-                                           prefHeight="234.0" prefWidth="503.0"/>
+                                <Button fx:id="btnVoltar" layoutX="401.0" layoutY="321.0" mnemonicParsing="false" onAction="#handleClickVoltarMenu" prefHeight="26.0" prefWidth="100.0" text="Voltar" />
+                                <Label layoutX="14.0" layoutY="31.0" text="Tipo do Alimento" />
+                                <TextField fx:id="txtPesquisaUsuario1" layoutX="140.0" layoutY="26.0" prefHeight="26.0" prefWidth="253.0" />
+                                <Button fx:id="btnPesquisarEstoque" layoutX="420.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleClickPesquisarEstoque" text="Pesquisar" />
+                                <TableView fx:id="tableEstoqueAlimentos" layoutX="11.0" layoutY="81.0" prefHeight="234.0" prefWidth="503.0" />
                             </children>
                         </AnchorPane>
                     </content>
