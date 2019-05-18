@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="528.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.CadastroConsultaFamiliaController">
+    <children>
+        <TabPane fx:id="paneBeneficiado" layoutY="-2.0" prefHeight="394.0" prefWidth="528.0"
+                 tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab fx:id="tabCadastraBeneficiado" text="Cadastrar Beneficiado">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="249.0" prefWidth="381.0">
+                            <children>
+                                <Label layoutX="52.0" layoutY="243.0"/>
+                                <Label layoutX="25.0" layoutY="27.0" text="Nome Beneficiado"/>
+                                <Label layoutX="22.0" layoutY="149.0" text="Endereço"/>
+                                <Label layoutX="22.0" layoutY="194.0" text="Bairro"/>
+                                <Label layoutX="378.0" layoutY="149.0" text="Número"/>
+                                <Label layoutX="281.0" layoutY="64.0" text="Telefone"/>
+                                <Label layoutX="229.0" layoutY="194.0" text="Cidade"/>
+                                <Label layoutX="20.0" layoutY="242.0" prefHeight="18.0" prefWidth="64.0"
+                                       text="Descrição"/>
+                                <Label layoutX="25.0" layoutY="105.0" text="Data de Nascimento"/>
+                                <Label layoutX="23.0" layoutY="64.0" text="Profissão"/>
+                                <TextField fx:id="txtNomeBeneficiado" layoutX="156.0" layoutY="22.0" prefHeight="26.0"
+                                           prefWidth="354.0"/>
+                                <TextField fx:id="txtProfissao" layoutX="92.0" layoutY="59.0" prefHeight="26.0"
+                                           prefWidth="178.0"/>
+                                <TextField fx:id="txtTelefone" layoutX="341.0" layoutY="59.0" prefHeight="26.0"
+                                           prefWidth="169.0"/>
+                                <DatePicker fx:id="dataNasc" layoutX="165.0" layoutY="100.0"/>
+                                <TextField fx:id="txtEndereco" layoutX="92.0" layoutY="144.0" prefHeight="26.0"
+                                           prefWidth="273.0"/>
+                                <TextField fx:id="txtNumero" layoutX="436.0" layoutY="144.0" prefHeight="26.0"
+                                           prefWidth="74.0"/>
+                                <TextField fx:id="txtBairro" layoutX="71.0" layoutY="189.0" prefHeight="26.0"
+                                           prefWidth="151.0"/>
+                                <TextField fx:id="txtCidade" layoutX="280.0" layoutY="189.0" prefHeight="26.0"
+                                           prefWidth="97.0"/>
+                                <TextArea fx:id="txtDescricao" layoutX="92.0" layoutY="242.0" prefHeight="59.0"
+                                          prefWidth="420.0"/>
+                                <Button fx:id="btnVoltar" layoutX="452.0" layoutY="321.0" mnemonicParsing="false"
+                                        onAction="#handleClickVoltaMenu" text="Voltar"/>
+                                <Button fx:id="btnSalvarBeneficiado" layoutX="346.0" layoutY="321.0"
+                                        mnemonicParsing="false" onAction="#handleClickSalvarBeneficiado" text="Salvar"/>
+                            </children>
+                            <effect>
+                                <Blend/>
+                            </effect>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="tabConsultaBeneficiado" text="Consultar Beneficiado">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="273.0" prefWidth="497.0">
+                            <children>
+                                <Button fx:id="btnVoltar" layoutX="411.0" layoutY="297.0" mnemonicParsing="false"
+                                        onAction="#handleClickVoltaMenu" prefHeight="50.0" prefWidth="100.0"
+                                        text="Voltar"/>
+                                <Button fx:id="btnExcluirBeneficiado" layoutX="129.0" layoutY="297.0"
+                                        mnemonicParsing="false" onAction="#handleClickExcluiBeneficiado"
+                                        prefHeight="50.0" prefWidth="100.0" text="Excluir"/>
+                                <Button fx:id="btnAtualizaBeneficiado" layoutX="264.0" layoutY="297.0"
+                                        mnemonicParsing="false" onAction="#handleClickAtualizaBeneficiado"
+                                        prefHeight="50.0" prefWidth="100.0" text="Atualizar"/>
+                                <Label layoutX="11.0" layoutY="31.0" text="Nome do Beneficiado"/>
+                                <TextField fx:id="txtPesquisaBeneficiado" layoutX="154.0" layoutY="26.0"
+                                           prefHeight="26.0" prefWidth="260.0"/>
+                                <Button fx:id="btnPesquisa" layoutX="430.0" layoutY="26.0" mnemonicParsing="false"
+                                        onAction="#handleClickPesquisaBeneficiado" text="Pesquisar"/>
+                                <TableView fx:id="tableListaBeneficiado" layoutX="11.0" layoutY="81.0"
+                                           prefHeight="200.0" prefWidth="505.0"/>
+                                <Button fx:id="btnHistoricoBeneficiado" layoutX="14.0" layoutY="297.0"
+                                        mnemonicParsing="false" onAction="#handleClickHistoricoBeneficiado"
+                                        prefHeight="50.0" prefWidth="100.0" text="Histórico"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Histórico de Cestas">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="273.0" prefWidth="497.0">
+                            <children>
+                                <Button fx:id="btnVoltar" layoutX="452.0" layoutY="321.0" mnemonicParsing="false"
+                                        onAction="#handleClickVoltaMenu" text="Voltar"/>
+                                <TableView layoutX="14.0" layoutY="34.0" prefHeight="273.0" prefWidth="503.0"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

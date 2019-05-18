@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="528.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.CadastroConsultaUsuarioController">
+    <children>
+        <TabPane fx:id="paneUsuario" layoutY="-2.0" prefHeight="394.0" prefWidth="528.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab fx:id="tabCadastraUsuario" text="Cadastrar Usuário">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="249.0" prefWidth="381.0">
+                            <children>
+                                <Label layoutX="50.0" layoutY="36.0" text="Nome">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Label>
+                                <Label layoutX="28.0" layoutY="79.0" text="Endereço">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Label>
+                                <Label layoutX="63.0" layoutY="123.0" text="CPF">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Label>
+                                <Label layoutX="31.0" layoutY="164.0" text="Telefone">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtNomeUsuario" layoutX="100.0" layoutY="31.0" prefHeight="26.0"
+                                           prefWidth="407.0"/>
+                                <TextField fx:id="txtCPF" layoutX="101.0" layoutY="118.0" prefHeight="26.0"
+                                           prefWidth="169.0"/>
+                                <Label layoutX="52.0" layoutY="205.0" text="Login">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Label>
+                                <Label layoutX="52.0" layoutY="243.0"/>
+                                <Label layoutX="49.0" layoutY="243.0" text="Senha">
+                                    <font>
+                                        <Font size="15.0"/>
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtTelefone" layoutX="101.0" layoutY="160.0" prefHeight="26.0"
+                                           prefWidth="168.0"/>
+                                <TextField fx:id="txtEnderecoUsuario" layoutX="101.0" layoutY="75.0" prefHeight="26.0"
+                                           prefWidth="406.0"/>
+                                <TextField fx:id="txtLogin" layoutX="99.0" layoutY="200.0" prefHeight="26.0"
+                                           prefWidth="169.0"/>
+                                <Button fx:id="btnCadastrarUsuario" layoutX="240.0" layoutY="284.0"
+                                        mnemonicParsing="false" onAction="#handleClickCadastraUsuario" prefHeight="50.0"
+                                        prefWidth="127.0" text="Salvar"/>
+                                <Button fx:id="btnVoltar" layoutX="399.0" layoutY="283.0" mnemonicParsing="false"
+                                        onAction="#handleClickVoltaMenu" prefHeight="50.0" prefWidth="104.0"
+                                        text="Voltar"/>
+                                <PasswordField fx:id="txtSenha" layoutX="100.0" layoutY="240.0"/>
+                            </children>
+                            <effect>
+                                <Blend/>
+                            </effect>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="tabConsultaUsuario" text="Consultar Usuário">
+                    <content>
+                        <AnchorPane fx:id="paneConsultaUsuario" minHeight="0.0" minWidth="0.0" prefHeight="273.0"
+                                    prefWidth="497.0">
+                            <children>
+                                <Button fx:id="btnVoltar" layoutX="401.0" layoutY="297.0" mnemonicParsing="false"
+                                        onAction="#handleClickVoltaMenu" prefHeight="50.0" prefWidth="100.0"
+                                        text="Voltar"/>
+                                <Button fx:id="btnExcluirUsuario" layoutX="48.0" layoutY="297.0" mnemonicParsing="false"
+                                        onAction="#handleClickExcluiUsuario" prefHeight="50.0" prefWidth="100.0"
+                                        text="Excluir"/>
+                                <Button fx:id="btnAtualizaUsuario" layoutX="190.0" layoutY="297.0"
+                                        mnemonicParsing="false" onAction="#handleClickAtualizaUsuario" prefHeight="50.0"
+                                        prefWidth="100.0" text="Atualizar"/>
+                                <Label layoutX="14.0" layoutY="31.0" text="Nome do Usuário"/>
+                                <TextField fx:id="txtPesquisaUsuario" layoutX="140.0" layoutY="26.0" prefHeight="26.0"
+                                           prefWidth="253.0"/>
+                                <Button fx:id="btnPesquisa" layoutX="420.0" layoutY="26.0" mnemonicParsing="false"
+                                        onAction="#handleClickPesquisarUsuario" text="Pesquisar"/>
+                                <TableView fx:id="tableListaUsuario" layoutX="11.0" layoutY="81.0" prefHeight="200.0"
+                                           prefWidth="490.0"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>
