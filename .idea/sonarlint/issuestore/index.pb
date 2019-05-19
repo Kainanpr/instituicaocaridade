@@ -19,3 +19,11 @@ Y
 )src/view/TelaCadastroConsultaFamilia.fxml,2\a\2a374e728bcf863b5b801a1feb02716ff239b53b
 O
 src/view/TelaMenuPrincipal.fxml,b\5\b5cb195b659dad518630894ddfc430f05852f09d
+S
+#src/persistence/dao/UsuarioDao.java,8\1\81eb01f2705d8c1dc529ae34719828be474feac0
+Y
+)src/persistence/connection/ConexaoDb.java,3\f\3f7736c2d3e8f6f9b711716cd0063a5397534a7d
+O
+src/service/UsuarioService.java,b\c\bc0207570b5fbc020e8d7b09ba9fc601891237fc
+f
+6src/controller/CadastroConsultaAlimentoController.java,5\4\541380546a2337834ce1e8cd0467b178e9634d43
