@@ -23,4 +23,8 @@ public class UsuarioService {
     public void deletar(int id) {
         usuarioDao.deletar(id);
     }
+
+    public List<Usuario> buscarPorNome(String nome) {
+        return usuarioDao.buscarPorNome(nome);
+    }
 }

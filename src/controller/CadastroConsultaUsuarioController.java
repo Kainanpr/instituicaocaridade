@@ -78,6 +78,9 @@ public class CadastroConsultaUsuarioController implements Initializable {
     private Button btnVoltar;
 
     @FXML
+    private Button btnResetLista;
+
+    @FXML
     private AnchorPane paneConsultaUsuario;
 
     @FXML
@@ -106,7 +109,7 @@ public class CadastroConsultaUsuarioController implements Initializable {
         }
 
         setPaneUsuario(new Usuario());
-        atualizarLista();
+        atualizarLista(usuarioService.listar());
     }
 
     @FXML
@@ -126,7 +129,7 @@ public class CadastroConsultaUsuarioController implements Initializable {
             }
         }
 
-        atualizarLista();
+        atualizarLista(usuarioService.listar());
     }
 
     @FXML
@@ -143,7 +146,17 @@ public class CadastroConsultaUsuarioController implements Initializable {
 
     @FXML
     void handleClickPesquisarUsuario(ActionEvent event) {
+        final String nome = txtPesquisaUsuario.getText();
 
+        List<Usuario> listaUsuarios = usuarioService.buscarPorNome(nome);
+
+        atualizarLista(listaUsuarios);
+    }
+
+    @FXML
+    void handleClickResetLista(ActionEvent event) {
+        txtPesquisaUsuario.setText("");
+        atualizarLista(usuarioService.listar());
     }
 
     @FXML
@@ -204,9 +217,7 @@ public class CadastroConsultaUsuarioController implements Initializable {
         tableListaUsuario.setItems(obsUsuarios);
     }
 
-    private void atualizarLista() {
-        final List<Usuario> listaUsuarios = usuarioService.listar();
-
+    private void atualizarLista(List<Usuario> listaUsuarios) {
         obsUsuarios.clear();
 
         for (Usuario usuario : listaUsuarios) {
@@ -218,6 +229,6 @@ public class CadastroConsultaUsuarioController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         carregarTiposUsuarios();
         configurarTableView();
-        atualizarLista();
+        atualizarLista(usuarioService.listar());
     }
 }

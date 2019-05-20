@@ -58,7 +58,7 @@ public class UsuarioDao {
         }
     }
 
-    public Usuario buscar(int id) {
+    public Usuario buscarPorId(int id) {
         try {
             conn = ConexaoDb.getConnection();
             String sql = "SELECT * FROM usuario WHERE id = ?";
@@ -78,6 +78,32 @@ public class UsuarioDao {
             conn.close();
 
             return usuarioBuscado;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Usuario> buscarPorNome(String nome) {
+        try {
+            conn = ConexaoDb.getConnection();
+            String sql = "SELECT * FROM usuario WHERE LOWER(nome) LIKE ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + nome + "%");
+            ResultSet rs = ps.executeQuery();
+            List<Usuario> listUsuarios = new ArrayList<>();
+
+            while (rs.next()) {
+                Usuario usuario = new Usuario(rs.getInt(1), rs.getString(2),
+                        rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7),
+                        Permissao.valueOf(rs.getString(8)));
+                listUsuarios.add(usuario);
+            }
+
+            ps.close();
+            conn.close();
+
+            return listUsuarios;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
