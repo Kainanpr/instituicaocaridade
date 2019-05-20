@@ -3,18 +3,22 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.Permissao;
 import util.Alerta;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class MenuPrincipalController {
+public class MenuPrincipalController implements Initializable {
 
     @FXML
     private Button btnMenuFamilias;
@@ -103,6 +107,13 @@ public class MenuPrincipalController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if (LoginController.usuarioLogado.getPermissao() == Permissao.DOADOR ) {
+            btnMenuUsuarios.setDisable(true);
         }
     }
 }

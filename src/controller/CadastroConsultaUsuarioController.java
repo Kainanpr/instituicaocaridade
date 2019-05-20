@@ -88,59 +88,75 @@ public class CadastroConsultaUsuarioController implements Initializable {
 
     @FXML
     void handleClickCadastrarUsuario(ActionEvent event) {
-        final String nome = txtNomeUsuario.getText();
-        final String endereco = txtEnderecoUsuario.getText();
-        final String cpf = txtCPF.getText();
-        final String telefone = txtTelefone.getText();
-        final String login = txtLogin.getText();
-        final String senha = txtSenha.getText();
+        final boolean isFuncionario = LoginController.usuarioLogado.getPermissao() == Permissao.FUNCIONARIO;
         final Permissao tipoUsuario = cbTiposUsuarios.getValue();
 
-        final Usuario usuario = new Usuario(nome, endereco, cpf, telefone, login, senha, tipoUsuario);
-
-        if (usuarioSelecionado == null) {
-            usuarioService.inserir(usuario);
-            Alerta.abrirAlert("Usuário cadastrado", "Usuário cadastrado com sucesso.", Alert.AlertType.INFORMATION);
+        if (isFuncionario && tipoUsuario == Permissao.ADMINISTRADOR) {
+            Alerta.abrirAlert("Erro", "Não tem permissão para cadastrar administrador.", Alert.AlertType.ERROR);
         } else {
-            usuario.setId(usuarioSelecionado.getId());
-            usuarioService.atualizar(usuario);
-            Alerta.abrirAlert("Usuário atualizado", "Usuário atualizado com sucesso.", Alert.AlertType.INFORMATION);
-            usuarioSelecionado = null;
-        }
+            final String nome = txtNomeUsuario.getText();
+            final String endereco = txtEnderecoUsuario.getText();
+            final String cpf = txtCPF.getText();
+            final String telefone = txtTelefone.getText();
+            final String login = txtLogin.getText();
+            final String senha = txtSenha.getText();
 
-        setPaneUsuario(new Usuario());
-        atualizarLista(usuarioService.listar());
+            final Usuario usuario = new Usuario(nome, endereco, cpf, telefone, login, senha, tipoUsuario);
+
+            if (usuarioSelecionado == null) {
+                usuarioService.inserir(usuario);
+                Alerta.abrirAlert("Usuário cadastrado", "Usuário cadastrado com sucesso.", Alert.AlertType.INFORMATION);
+            } else {
+                usuario.setId(usuarioSelecionado.getId());
+                usuarioService.atualizar(usuario);
+                Alerta.abrirAlert("Usuário atualizado", "Usuário atualizado com sucesso.", Alert.AlertType.INFORMATION);
+                usuarioSelecionado = null;
+            }
+
+            setPaneUsuario(new Usuario());
+            atualizarLista(usuarioService.listar());
+        }
     }
 
     @FXML
     void handleClickExcluirUsuario(ActionEvent event) {
+        final boolean isFuncionario = LoginController.usuarioLogado.getPermissao() == Permissao.FUNCIONARIO;
         usuarioSelecionado = tableListaUsuario.getSelectionModel().getSelectedItem();
 
-        if (usuarioSelecionado == null) {
-            Alerta.abrirAlert("Erro", "Selecione um usuário para excluir.", Alert.AlertType.ERROR);
+        if (isFuncionario && usuarioSelecionado.getPermissao() == Permissao.ADMINISTRADOR) {
+            Alerta.abrirAlert("Erro", "Não tem permissão para excluir administrador.", Alert.AlertType.ERROR);
         } else {
-            Alert alert = Alerta.confirmarAlert("Deseja excluir o usuário?", "Você tem certeza que deseja excluir este Usuário?");
-            Optional<ButtonType> result = alert.showAndWait();
+            if (usuarioSelecionado == null) {
+                Alerta.abrirAlert("Erro", "Selecione um usuário para excluir.", Alert.AlertType.ERROR);
+            } else {
+                Alert alert = Alerta.confirmarAlert("Deseja excluir o usuário?", "Você tem certeza que deseja excluir este Usuário?");
+                Optional<ButtonType> result = alert.showAndWait();
 
-            if (result.get() == ButtonType.OK) {
-                usuarioService.deletar(usuarioSelecionado.getId());
-                Alerta.abrirAlert("Usuário excluído", "Usuário excluído com sucesso.", Alert.AlertType.INFORMATION);
-                usuarioSelecionado = null;
+                if (result.get() == ButtonType.OK) {
+                    usuarioService.deletar(usuarioSelecionado.getId());
+                    Alerta.abrirAlert("Usuário excluído", "Usuário excluído com sucesso.", Alert.AlertType.INFORMATION);
+                    usuarioSelecionado = null;
+                }
             }
-        }
 
-        atualizarLista(usuarioService.listar());
+            atualizarLista(usuarioService.listar());
+        }
     }
 
     @FXML
     void handleClickAtualizarUsuario(ActionEvent event) {
+        final boolean isFuncionario = LoginController.usuarioLogado.getPermissao() == Permissao.FUNCIONARIO;
         usuarioSelecionado = tableListaUsuario.getSelectionModel().getSelectedItem();
 
-        if (usuarioSelecionado == null) {
-            Alerta.abrirAlert("Erro", "Selecione um usuário para ser atualizado.", Alert.AlertType.ERROR);
+        if (isFuncionario && usuarioSelecionado.getPermissao() == Permissao.ADMINISTRADOR) {
+            Alerta.abrirAlert("Erro", "Não tem permissão para atualizar administrador.", Alert.AlertType.ERROR);
         } else {
-            paneUsuario.getSelectionModel().select(tabCadastrarUsuario);
-            setPaneUsuario(usuarioSelecionado);
+            if (usuarioSelecionado == null) {
+                Alerta.abrirAlert("Erro", "Selecione um usuário para ser atualizado.", Alert.AlertType.ERROR);
+            } else {
+                paneUsuario.getSelectionModel().select(tabCadastrarUsuario);
+                setPaneUsuario(usuarioSelecionado);
+            }
         }
     }
 
