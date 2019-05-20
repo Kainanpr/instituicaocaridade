@@ -9,8 +9,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("view/TelaLogin.fxml"));
+        primaryStage.setResizable(false);
         primaryStage.setTitle("Tela de Login");
-        primaryStage.setScene(new Scene(root, 235, 461));
+        primaryStage.setScene(new Scene(root, 335, 461));
         primaryStage.show();
     }
 

@@ -4,11 +4,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import util.Alerta;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class MenuPrincipalController {
 
@@ -80,6 +84,25 @@ public class MenuPrincipalController {
 
     @FXML
     void HandleClickSair(ActionEvent event) {
+        Alert alert = Alerta.confirmarAlert("Deseja sair do sistema?", "Você tem certeza que deseja sair do sistema?");
+        Optional<ButtonType> result = alert.showAndWait();
 
+        if (result.get() == ButtonType.OK) {
+            try {
+                LoginController.usuarioLogado = null;
+                Pane telaLogin = FXMLLoader.load(getClass().getResource("../view/TelaLogin.fxml"));
+                // Fecha janela anterior
+                ((Stage) btnSair.getScene().getWindow()).hide();
+                Scene scene = new Scene(telaLogin, 335, 461);
+                Stage stage = new Stage();
+                //Desabilita o redimensionamento
+                stage.setResizable(false);
+                stage.setTitle("Tela de Login");
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

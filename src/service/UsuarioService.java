@@ -27,4 +27,8 @@ public class UsuarioService {
     public List<Usuario> buscarPorNome(String nome) {
         return usuarioDao.buscarPorNome(nome);
     }
+
+    public Usuario verificarAcesso(String login, String senha) {
+        return usuarioDao.verificarAcesso(login, senha);
+    }
 }

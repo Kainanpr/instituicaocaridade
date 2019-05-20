@@ -36,6 +36,32 @@ public class UsuarioDao {
         }
     }
 
+    public Usuario verificarAcesso(String login, String senha) {
+        try {
+            conn = ConexaoDb.getConnection();
+            String sql = "SELECT * FROM usuario WHERE login = ? AND senha = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, login);
+            ps.setString(2, senha);
+            ResultSet rs = ps.executeQuery();
+            Usuario usuarioBuscado = null;
+
+            while (rs.next()) {
+                usuarioBuscado = new Usuario(rs.getInt(1), rs.getString(2),
+                        rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7),
+                        Permissao.valueOf(rs.getString(8)));
+            }
+
+            ps.close();
+            conn.close();
+
+            return usuarioBuscado;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void atualizar(Usuario usuario) {
         try {
             conn = ConexaoDb.getConnection();
