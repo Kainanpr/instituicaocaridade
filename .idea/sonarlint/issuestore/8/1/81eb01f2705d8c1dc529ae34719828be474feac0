@@ -1,13 +1,0 @@
-
-fsquid:S2095Z"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ÀÖĞ½
-^squid:S2095["GUse try-with-resources or close this "ResultSet" in a "finally" clause.(·¦Ã…
-fsquid:S2095s"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ÀÖĞ½
-fsquid:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ÀÖĞ½
-fsquid:S2095,"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ÀÖĞ½
-^squid:S2095C"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(·¦Ã…
-fsquid:S2095A"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ÀÖĞ½
-csquid:S00112#"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
-csquid:S001129"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
-csquid:S00112R"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
-csquid:S00112k"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
-csquid:S00112y"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
