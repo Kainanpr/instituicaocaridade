@@ -3,58 +3,54 @@ package persistence.dao;
 import model.Alimento;
 import persistence.connection.ConexaoDb;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDate;
+import java.sql.*;
+import java.time.ZoneId;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.List;
 
 public class AlimentoDao {
-
     private Connection conn;
 
-    public void inserir(Alimento alimento){
+    public void inserir(Alimento alimento) {
+        ZoneId zoneId = ZoneId.systemDefault();
 
-        try{
+        try {
             conn = ConexaoDb.getConnection();
-            String sql = "INSERT INTO alimento(nome,data_validade,tipo) " +
-                    " VALUES( ? , ? , ? )";
+            String sql = "INSERT INTO alimento (nome_alimento, data_validade, tipo) " +
+                    "VALUES(?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, alimento.getNome_alimento());
-            ps.setDate(2, new java.sql.Date(alimento.getData_validade().getTime()));
-            ps.setString(3,alimento.getTipo());
+            ps.setString(1, alimento.getNomeAlimento());
+            ps.setDate(2, Date.valueOf(alimento.getDataValidade()));
+            ps.setString(3, alimento.getTipo());
             ps.executeUpdate();
             ps.close();
             conn.close();
-
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void atualizar(Alimento alimento){
+    public void atualizar(Alimento alimento) {
 
-        try{
+        try {
             conn = ConexaoDb.getConnection();
             String sql = "UPDATE alimento SET nome_alimento = ?, data_validade = ?, tipo = ?" +
                     " WHERE id_alimento = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1,alimento.getNome_alimento());
-            ps.setDate(2,new java.sql.Date(alimento.getData_validade().getTime()));
-            ps.setString(3,alimento.getTipo());
+            ps.setString(1, alimento.getNomeAlimento());
+            ps.setDate(2, Date.valueOf(alimento.getDataValidade()));
+            ps.setString(3, alimento.getTipo());
+            ps.setInt(4, alimento.getId());
             ps.executeUpdate();
             ps.close();
             conn.close();
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public List<Alimento> buscar_tipo(String tipo){
+    public List<Alimento> buscarPorTipo(String tipo) {
 
         try {
             conn = ConexaoDb.getConnection();
@@ -62,30 +58,30 @@ public class AlimentoDao {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, "%" + tipo + "%");
             ResultSet rs = ps.executeQuery();
-            List<Alimento> listAlimento = new ArrayList<>();
+            List<Alimento> listAlimentos = new ArrayList<>();
 
             while (rs.next()) {
                 Alimento alimento = new Alimento(rs.getInt(1),
                         rs.getString(2),
-                        rs.getDate(3),
+                        rs.getDate(3).toLocalDate(),
                         rs.getString(4));
-                listAlimento.add(alimento);
+                listAlimentos.add(alimento);
             }
 
             ps.close();
             conn.close();
 
-            return listAlimento;
+            return listAlimentos;
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
     }
 
-    public List<Alimento> listar(){
+    public List<Alimento> listar() {
 
-        try{
+        try {
             conn = ConexaoDb.getConnection();
             String sql = "SELECT * FROM alimento ORDER BY nome_alimento DESC";
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -96,7 +92,7 @@ public class AlimentoDao {
                 Alimento alimento = new Alimento(
                         rs.getInt(1),
                         rs.getString(2),
-                        rs.getDate(3),
+                        rs.getDate(3).toLocalDate(),
                         rs.getString(4));
                 listAlimentos.add(alimento);
             }
@@ -106,31 +102,25 @@ public class AlimentoDao {
 
             return listAlimentos;
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
     }
 
-    public void deletar(Alimento alimento){
+    public void deletar(int id) {
 
         try {
             conn = ConexaoDb.getConnection();
             String sql = "DELETE FROM alimento WHERE id_alimento = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1,alimento.getId_alimento());
+            ps.setInt(1, id);
             ps.executeUpdate();
             ps.close();
             conn.close();
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-
-    private static Date convertToDate(LocalDate locDate) {
-
-        return (locDate == null ? null : Date.valueOf(locDate));
     }
 }

@@ -1,43 +1,53 @@
 package model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Alimento {
 
-    private int id_alimento;
-    private String nome_alimento;
-    private Date data_validade;
+    private int id;
+    private String nomeAlimento;
+    private LocalDate dataValidade;
     private String tipo;
 
-    public Alimento(int id_alimento, String nome_alimento, Date data_validade, String tipo){
-        this.id_alimento = id_alimento;
-        this.nome_alimento = nome_alimento;
-        this.data_validade = data_validade;
+    public Alimento() {
+
+    }
+
+    public Alimento(int id, String nomeAlimento, LocalDate dataValidade, String tipo) {
+        this.id = id;
+        this.nomeAlimento = nomeAlimento;
+        this.dataValidade = dataValidade;
         this.tipo = tipo;
     }
 
-    public int getId_alimento() {
-        return id_alimento;
+    public Alimento(String nomeAlimento, LocalDate dataValidade, String tipo) {
+        this.nomeAlimento = nomeAlimento;
+        this.dataValidade = dataValidade;
+        this.tipo = tipo;
     }
 
-    public void setId_alimento(int id_alimento) {
-        this.id_alimento = id_alimento;
+    public int getId() {
+        return id;
     }
 
-    public String getNome_alimento() {
-        return nome_alimento;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setNome_alimento(String nome_alimento) {
-        this.nome_alimento = nome_alimento;
+    public String getNomeAlimento() {
+        return nomeAlimento;
     }
 
-    public Date getData_validade() {
-        return data_validade;
+    public void setNomeAlimento(String nomeAlimento) {
+        this.nomeAlimento = nomeAlimento;
     }
 
-    public void setData_validade(Date data_validade) {
-        this.data_validade = data_validade;
+    public LocalDate getDataValidade() {
+        return dataValidade;
+    }
+
+    public void setDataValidade(LocalDate dataValidade) {
+        this.dataValidade = dataValidade;
     }
 
     public String getTipo() {
@@ -51,9 +61,9 @@ public class Alimento {
     @Override
     public String toString() {
         return "Alimento{" +
-                "id_alimento=" + id_alimento +
-                ", nome_alimento='" + nome_alimento + '\'' +
-                ", data_validade='" + data_validade + '\'' +
+                "id=" + id +
+                ", nomeAlimento='" + nomeAlimento + '\'' +
+                ", dataValidade=" + dataValidade +
                 ", tipo='" + tipo + '\'' +
                 '}';
     }
