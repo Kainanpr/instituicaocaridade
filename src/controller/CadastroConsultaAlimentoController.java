@@ -26,12 +26,13 @@ public class CadastroConsultaAlimentoController implements Initializable {
     private AlimentoService alimentoService = new AlimentoService();
     private ObservableList<Alimento> obsAlimentos;
     private ObservableList<Alimento> obsAlimentosVencidos;
+    private ObservableList<Alimento> obsAlimentosPorTipo;
 
     @FXML
     private TableView<Alimento> tableAlimento;
 
     @FXML
-    private TableView<?> tableEstoqueAlimentos;
+    private TableView<Alimento> tableEstoqueAlimentos;
 
     @FXML
     private Button btnAdicionarAlimento;
@@ -52,7 +53,7 @@ public class CadastroConsultaAlimentoController implements Initializable {
     private TableView<Alimento> tableValidade;
 
     @FXML
-    private TextField txtPesquisaUsuario1;
+    private TextField txtTipoPesquisar;
 
     @FXML
     private DatePicker dataValidade;
@@ -84,11 +85,16 @@ public class CadastroConsultaAlimentoController implements Initializable {
         setPaneAlimento(new Alimento());
         atualizarListaCadastro(alimentoService.listar());
         atualizarListaVencidos(alimentoService.listarVencidos());
+        atualizarListaPesquisaPorTipo(alimentoService.listar());
     }
 
     @FXML
     void handleClickPesquisarEstoque(ActionEvent event) {
+        final String tipo = txtTipoPesquisar.getText();
 
+        List<Alimento> listaAlimentos = alimentoService.buscarPorTipo(tipo);
+
+        atualizarListaPesquisaPorTipo(listaAlimentos);
     }
 
     @FXML
@@ -128,14 +134,18 @@ public class CadastroConsultaAlimentoController implements Initializable {
         TableColumn<Alimento, LocalDate> dataValidade = new TableColumn<>("Validade");
         dataValidade.setMinWidth(122);
 
+        TableColumn<Alimento, String> tipo = new TableColumn<>("Tipo");
+        tipo.setMinWidth(178);
+
         TableColumn<Alimento, Usuario> usuario = new TableColumn<>("Usuario");
         usuario.setMinWidth(122);
 
-        tableAlimento.getColumns().addAll(id, nome, dataValidade, usuario);
+        tableAlimento.getColumns().addAll(id, nome, dataValidade, tipo, usuario);
 
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         nome.setCellValueFactory(new PropertyValueFactory<>("nomeAlimento"));
         dataValidade.setCellValueFactory(new PropertyValueFactory<>("dataValidade"));
+        tipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         usuario.setCellValueFactory(new PropertyValueFactory<>("usuario"));
 
         tableAlimento.setItems(obsAlimentos);
@@ -161,14 +171,18 @@ public class CadastroConsultaAlimentoController implements Initializable {
         TableColumn<Alimento, LocalDate> dataValidade = new TableColumn<>("Validade");
         dataValidade.setMinWidth(122);
 
+        TableColumn<Alimento, String> tipo = new TableColumn<>("Tipo");
+        tipo.setMinWidth(178);
+
         TableColumn<Alimento, Usuario> usuario = new TableColumn<>("Usuario");
         usuario.setMinWidth(122);
 
-        tableValidade.getColumns().addAll(id, nome, dataValidade, usuario);
+        tableValidade.getColumns().addAll(id, nome, dataValidade, tipo, usuario);
 
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         nome.setCellValueFactory(new PropertyValueFactory<>("nomeAlimento"));
         dataValidade.setCellValueFactory(new PropertyValueFactory<>("dataValidade"));
+        tipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         usuario.setCellValueFactory(new PropertyValueFactory<>("usuario"));
 
         tableValidade.setItems(obsAlimentosVencidos);
@@ -182,11 +196,50 @@ public class CadastroConsultaAlimentoController implements Initializable {
         }
     }
 
+    private void configurarTableViewPesquisaPorTipo() {
+        obsAlimentosPorTipo = FXCollections.observableArrayList();
+
+        TableColumn<Alimento, Integer> id = new TableColumn<>("Id");
+        id.setMinWidth(50);
+
+        TableColumn<Alimento, String> nome = new TableColumn<>("Nome");
+        nome.setMinWidth(178);
+
+        TableColumn<Alimento, LocalDate> qtdEstoque = new TableColumn<>("Estoque");
+        qtdEstoque.setMinWidth(122);
+
+        TableColumn<Alimento, String> tipo = new TableColumn<>("Tipo");
+        tipo.setMinWidth(178);
+
+        TableColumn<Alimento, Usuario> usuario = new TableColumn<>("Usuario");
+        usuario.setMinWidth(122);
+
+        tableEstoqueAlimentos.getColumns().addAll(id, nome, qtdEstoque, tipo, usuario);
+
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nome.setCellValueFactory(new PropertyValueFactory<>("nomeAlimento"));
+        qtdEstoque.setCellValueFactory(new PropertyValueFactory<>("qtdEstoque"));
+        tipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        usuario.setCellValueFactory(new PropertyValueFactory<>("usuario"));
+
+        tableEstoqueAlimentos.setItems(obsAlimentosPorTipo);
+    }
+
+    private void atualizarListaPesquisaPorTipo(List<Alimento> listAlimentos) {
+        obsAlimentosPorTipo.clear();
+
+        for (Alimento alimento : listAlimentos) {
+            obsAlimentosPorTipo.add(alimento);
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         configurarTableViewCadastro();
         configurarTableViewVencidos();
+        configurarTableViewPesquisaPorTipo();
         atualizarListaCadastro(alimentoService.listar());
         atualizarListaVencidos(alimentoService.listarVencidos());
+        atualizarListaPesquisaPorTipo(alimentoService.listar());
     }
 }
