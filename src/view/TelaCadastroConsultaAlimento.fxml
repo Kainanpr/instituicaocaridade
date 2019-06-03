@@ -13,17 +13,18 @@
             <tabs>
                 <Tab fx:id="tabCadastrarAlimento" text="Cadastrar Alimento">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="249.0" prefWidth="381.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="403.0" prefWidth="533.0">
                             <children>
-                                <Label layoutX="52.0" layoutY="243.0" />
                                 <Label layoutX="34.0" layoutY="28.0" text="Nome do Alimento" />
-                                <Label layoutX="127.0" layoutY="109.0" text="Tipo" />
                                 <TextField fx:id="txtNomeAlimento" layoutX="170.0" layoutY="23.0" prefHeight="26.0" prefWidth="270.0" />
+                                <Label layoutX="47.0" layoutY="66.0" text="Data de Validade" />
                                 <DatePicker fx:id="dataValidade" layoutX="170.0" layoutY="61.0" />
-                                <Label layoutX="38.0" layoutY="66.0" text="Data de Validade" />
+                        <Label layoutX="83.0" layoutY="104.0" text="Quantidade" />
+                        <TextField fx:id="txtQuantidade" layoutX="171.0" layoutY="99.0" text="0" />
+                                <Label layoutX="131.0" layoutY="148.0" text="Tipo" />
+                                <TextField fx:id="txtTipo" layoutX="171.0" layoutY="143.0" />
+                                <Button fx:id="btnSalvarAlimento" layoutX="449.0" layoutY="147.0" mnemonicParsing="false" onAction="#handleClickSalvarAlimento" text="Salvar" />
                                 <TableView fx:id="tableAlimento" layoutX="19.0" layoutY="192.0" prefHeight="120.0" prefWidth="491.0" />
-                                <Button fx:id="btnAdicionarAlimento" layoutX="338.0" layoutY="155.0" mnemonicParsing="false" onAction="#handleClickAdicionarAlimento" text="Adicionar Alimento" />
-                                <TextField fx:id="txtTipo" layoutX="170.0" layoutY="104.0" />
                                 <Button fx:id="btnVoltar" layoutX="449.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleClickVoltarMenu" text="Voltar" />
                             </children>
                             <effect>
@@ -32,7 +33,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab fx:id="tabValidadesProximas" text="Validades Próximas">
+                <Tab fx:id="tabVencidos" text="Vencidos">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="273.0" prefWidth="497.0">
                             <children>

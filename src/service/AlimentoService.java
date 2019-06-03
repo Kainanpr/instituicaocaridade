@@ -27,4 +27,8 @@ public class AlimentoService {
     public void deletar(int id) {
         alimentoDao.deletar(id);
     }
+
+    public List<Alimento> listarVencidos() {
+        return alimentoDao.listarVencidos();
+    }
 }
