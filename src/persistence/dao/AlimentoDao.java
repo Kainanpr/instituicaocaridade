@@ -92,7 +92,6 @@ public class AlimentoDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public List<Alimento> listar() {
