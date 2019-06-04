@@ -34,8 +34,8 @@
                                 <TextField fx:id="txtBairro" layoutX="71.0" layoutY="189.0" prefHeight="26.0" prefWidth="151.0" />
                                 <TextField fx:id="txtCidade" layoutX="280.0" layoutY="189.0" prefHeight="26.0" prefWidth="97.0" />
                                 <TextArea fx:id="txtDescricao" layoutX="92.0" layoutY="242.0" prefHeight="59.0" prefWidth="420.0" />
-                                <Button fx:id="btnVoltar" layoutX="452.0" layoutY="321.0" mnemonicParsing="false" onAction="#handleClickVoltarMenu" text="Voltar" />
                                 <Button fx:id="btnSalvarBeneficiado" layoutX="346.0" layoutY="321.0" mnemonicParsing="false" onAction="#handleClickSalvarBeneficiado" text="Salvar" />
+                                <Button fx:id="btnVoltar" layoutX="452.0" layoutY="321.0" mnemonicParsing="false" onAction="#handleClickVoltarMenu" text="Voltar" />
                             </children>
                             <effect>
                                 <Blend />

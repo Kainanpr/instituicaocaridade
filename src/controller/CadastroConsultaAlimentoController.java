@@ -211,15 +211,19 @@ public class CadastroConsultaAlimentoController implements Initializable {
         TableColumn<Alimento, String> tipo = new TableColumn<>("Tipo");
         tipo.setMinWidth(178);
 
+        TableColumn<Alimento, LocalDate> dataValidade = new TableColumn<>("Validade");
+        dataValidade.setMinWidth(122);
+
         TableColumn<Alimento, Usuario> usuario = new TableColumn<>("Usuario");
         usuario.setMinWidth(122);
 
-        tableEstoqueAlimentos.getColumns().addAll(id, nome, qtdEstoque, tipo, usuario);
+        tableEstoqueAlimentos.getColumns().addAll(id, nome, qtdEstoque, tipo, dataValidade, usuario);
 
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         nome.setCellValueFactory(new PropertyValueFactory<>("nomeAlimento"));
         qtdEstoque.setCellValueFactory(new PropertyValueFactory<>("qtdEstoque"));
         tipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        dataValidade.setCellValueFactory(new PropertyValueFactory<>("dataValidade"));
         usuario.setCellValueFactory(new PropertyValueFactory<>("usuario"));
 
         tableEstoqueAlimentos.setItems(obsAlimentosPorTipo);
