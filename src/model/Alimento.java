@@ -82,13 +82,6 @@ public class Alimento {
 
     @Override
     public String toString() {
-        return "Alimento{" +
-                "id=" + id +
-                ", nomeAlimento='" + nomeAlimento + '\'' +
-                ", dataValidade=" + dataValidade +
-                ", qtdEstoque=" + qtdEstoque +
-                ", tipo='" + tipo + '\'' +
-                ", usuario=" + usuario +
-                '}';
+        return nomeAlimento;
     }
 }

@@ -94,6 +94,48 @@ public class AlimentoDao {
         }
     }
 
+    public Alimento buscarPorNome(String nome) {
+
+        try {
+            conn = ConexaoDb.getConnection();
+            String sql = "SELECT * FROM alimento a INNER JOIN usuario u ON a.id_usuario = u.id WHERE nome_alimento LIKE ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, nome);
+            ResultSet rs = ps.executeQuery();
+            List<Alimento> listAlimentos = new ArrayList<>();
+
+            while (rs.next()) {
+                Usuario usuario = new Usuario(rs.getInt(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        Permissao.valueOf(rs.getString(14)));
+
+                Alimento alimento = new Alimento(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDate(3).toLocalDate(),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        usuario);
+                listAlimentos.add(alimento);
+            }
+
+            ps.close();
+            conn.close();
+
+            if (listAlimentos.size() > 0) {
+                return listAlimentos.get(0);
+            }
+
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<Alimento> listar() {
 
         try {

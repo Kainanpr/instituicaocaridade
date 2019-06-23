@@ -20,6 +20,10 @@ public class AlimentoService {
         return alimentoDao.buscarPorTipo(tipo);
     }
 
+    public Alimento buscarPorNome(String nome) {
+        return alimentoDao.buscarPorNome(nome);
+    }
+
     public List<Alimento> listar() {
         return alimentoDao.listar();
     }
