@@ -21,6 +21,9 @@ import java.util.ResourceBundle;
 public class MenuPrincipalController implements Initializable {
 
     @FXML
+    private Button btnMenuMontarCesta;
+
+    @FXML
     private Button btnMenuFamilias;
 
     @FXML
@@ -31,6 +34,24 @@ public class MenuPrincipalController implements Initializable {
 
     @FXML
     private Button btnMenuUsuarios;
+
+    @FXML
+    void HandleClickMontarCesta(ActionEvent event) {
+        try {
+            Pane menuPrincipal = FXMLLoader.load(getClass().getResource("../view/TelaMontarCesta.fxml"));
+            // Fecha janela anterior
+            ((Stage) btnMenuMontarCesta.getScene().getWindow()).hide();
+            Scene scene = new Scene(menuPrincipal);
+            Stage stage = new Stage();
+            //Desabilita o redimensionamento
+            stage.setResizable(false);
+            stage.setTitle("Montar Cesta");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void HandleClickNovoAlimento(ActionEvent event) {
