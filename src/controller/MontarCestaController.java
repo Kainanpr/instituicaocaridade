@@ -24,9 +24,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MontarCestaController implements Initializable {
+    private ItemCesta itemCestaSelecionado;
     private List<ItemCesta> listaItemCesta = new ArrayList<>();
     private AlimentoService alimentoService = new AlimentoService();
     private ItemCesta itemCestaAdicionar = new ItemCesta();
@@ -97,7 +99,7 @@ public class MontarCestaController implements Initializable {
         Alimento alimentoAdicionar = itemCestaAdicionar.getAlimento();
 
         if (alimentoAdicionar != null) {
-            final Integer quantidade = txtQuantidade.getText() != "" ? Integer.parseInt(txtQuantidade.getText()) : 1;
+            final Integer quantidade = txtQuantidade.getText().isEmpty() ? 1 : Integer.parseInt(txtQuantidade.getText());
 
 
             if (quantidade <= alimentoAdicionar.getQtdEstoque() && quantidade > 0) {
@@ -109,17 +111,33 @@ public class MontarCestaController implements Initializable {
             } else {
                 Alerta.abrirAlert("Erro", "Quantidade indisponível.", Alert.AlertType.ERROR);
             }
+        } else {
+            Alerta.abrirAlert("Erro", "Selecione um alimento.", Alert.AlertType.ERROR);
         }
     }
 
     @FXML
     void handleClickCancelar(ActionEvent event) {
-
+        setPaneAlimentos(new Alimento(), "");
+        itemCestaAdicionar = new ItemCesta();
     }
 
     @FXML
     void handleClickExcluirDaCesta(ActionEvent event) {
+        itemCestaSelecionado = tableItemCesta.getSelectionModel().getSelectedItem();
 
+        if (tableItemCesta == null) {
+            Alerta.abrirAlert("Erro", "Selecione um item para excluir.", Alert.AlertType.ERROR);
+        } else {
+            Alert alert = Alerta.confirmarAlert("Deseja excluir o item?", "Você tem certeza que deseja excluir este item?");
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.get() == ButtonType.OK) {
+                listaItemCesta.remove(itemCestaSelecionado);
+            }
+        }
+
+        atualizarListaItemCesta(listaItemCesta);
     }
 
     @FXML
@@ -162,7 +180,7 @@ public class MontarCestaController implements Initializable {
         nome.setMinWidth(140);
 
         TableColumn<ItemCesta, String> tipo = new TableColumn<>("Quantidade");
-        tipo.setMinWidth(50);
+        tipo.setMinWidth(100);
 
         tableItemCesta.getColumns().addAll(nome, tipo);
 
