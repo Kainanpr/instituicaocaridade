@@ -49,9 +49,10 @@
                             <children>
                                 <Button fx:id="btnVoltar" layoutX="401.0" layoutY="321.0" mnemonicParsing="false" onAction="#handleClickVoltarMenu" prefHeight="26.0" prefWidth="100.0" text="Voltar" />
                                 <Label layoutX="14.0" layoutY="31.0" text="Tipo do Alimento" />
-                                <TextField fx:id="txtTipoPesquisar" layoutX="140.0" layoutY="26.0" prefHeight="26.0" prefWidth="253.0" />
-                                <Button fx:id="btnPesquisarEstoque" layoutX="420.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleClickPesquisarEstoque" text="Pesquisar" />
+                                <TextField fx:id="txtTipoPesquisar" layoutX="140.0" layoutY="26.0" prefHeight="26.0" prefWidth="221.0" />
+                                <Button fx:id="btnPesquisarEstoque" layoutX="368.0" layoutY="27.0" mnemonicParsing="false" onAction="#handleClickPesquisarEstoque" text="Pesquisar" />
                                 <TableView fx:id="tableEstoqueAlimentos" layoutX="11.0" layoutY="81.0" prefHeight="234.0" prefWidth="503.0" />
+                        <Button fx:id="btnResetLista" layoutX="447.0" layoutY="27.0" mnemonicParsing="false" onAction="#handleClickResetLista" text="Reset" />
                             </children>
                         </AnchorPane>
                     </content>

@@ -112,8 +112,9 @@ public class MenuPrincipalController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (LoginController.usuarioLogado.getPermissao() == Permissao.DOADOR ) {
+        if (LoginController.usuarioLogado.getPermissao() == Permissao.DOADOR) {
             btnMenuUsuarios.setDisable(true);
+            btnMenuFamilias.setDisable(true);
         }
     }
 }

@@ -65,6 +65,9 @@ public class CadastroConsultaAlimentoController implements Initializable {
     private Button btnPesquisarEstoque;
 
     @FXML
+    private Button btnResetLista;
+
+    @FXML
     private Tab tabVencidos;
 
     @FXML
@@ -95,6 +98,12 @@ public class CadastroConsultaAlimentoController implements Initializable {
         List<Alimento> listaAlimentos = alimentoService.buscarPorTipo(tipo);
 
         atualizarListaPesquisaPorTipo(listaAlimentos);
+    }
+
+    @FXML
+    void handleClickResetLista(ActionEvent event) {
+        txtTipoPesquisar.setText("");
+        atualizarListaPesquisaPorTipo(alimentoService.listar());
     }
 
     @FXML

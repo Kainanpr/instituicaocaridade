@@ -1,6 +1,6 @@
 package persistence.dao;
 
-import model.Beneficiario;
+import model.Beneficiado;
 import model.Permissao;
 import model.Usuario;
 import persistence.connection.ConexaoDb;
@@ -9,26 +9,26 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BeneficiarioDao {
+public class BeneficiadoDao {
     private Connection conn;
 
-    public void inserir(Beneficiario beneficiario) {
+    public void inserir(Beneficiado beneficiado) {
         try {
             conn = ConexaoDb.getConnection();
-            String sql = "INSERT INTO beneficiario (nome, profissao, telefone, data_nascimento, " +
+            String sql = "INSERT INTO beneficiado (nome, profissao, telefone, data_nascimento, " +
                     "endereco, numero, cidade, bairro, descricao, id_usuario) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, beneficiario.getNome());
-            ps.setString(2, beneficiario.getProfissao());
-            ps.setString(3, beneficiario.getTelefone());
-            ps.setDate(4, Date.valueOf(beneficiario.getDataNascimento()));
-            ps.setString(5, beneficiario.getEndereco());
-            ps.setInt(6, beneficiario.getNumero());
-            ps.setString(7, beneficiario.getCidade());
-            ps.setString(8, beneficiario.getBairro());
-            ps.setString(9, beneficiario.getDescricao());
-            ps.setInt(10, beneficiario.getUsuario().getId());
+            ps.setString(1, beneficiado.getNome());
+            ps.setString(2, beneficiado.getProfissao());
+            ps.setString(3, beneficiado.getTelefone());
+            ps.setDate(4, Date.valueOf(beneficiado.getDataNascimento()));
+            ps.setString(5, beneficiado.getEndereco());
+            ps.setInt(6, beneficiado.getNumero());
+            ps.setString(7, beneficiado.getCidade());
+            ps.setString(8, beneficiado.getBairro());
+            ps.setString(9, beneficiado.getDescricao());
+            ps.setInt(10, beneficiado.getUsuario().getId());
             ps.executeUpdate();
             ps.close();
             conn.close();
@@ -37,22 +37,22 @@ public class BeneficiarioDao {
         }
     }
 
-    public void atualizar(Beneficiario beneficiario) {
+    public void atualizar(Beneficiado beneficiado) {
         try {
             conn = ConexaoDb.getConnection();
-            String sql = "UPDATE beneficiario SET nome = ?, profissao = ?, telefone = ?, " +
+            String sql = "UPDATE beneficiado SET nome = ?, profissao = ?, telefone = ?, " +
                     "data_nascimento = ?, endereco = ?, numero = ?, cidade = ?, bairro = ?, descricao = ? WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, beneficiario.getNome());
-            ps.setString(2, beneficiario.getProfissao());
-            ps.setString(3, beneficiario.getTelefone());
-            ps.setDate(4, Date.valueOf(beneficiario.getDataNascimento()));
-            ps.setString(5, beneficiario.getEndereco());
-            ps.setInt(6, beneficiario.getNumero());
-            ps.setString(7, beneficiario.getCidade());
-            ps.setString(8, beneficiario.getBairro());
-            ps.setString(9, beneficiario.getDescricao());
-            ps.setInt(10, beneficiario.getId());
+            ps.setString(1, beneficiado.getNome());
+            ps.setString(2, beneficiado.getProfissao());
+            ps.setString(3, beneficiado.getTelefone());
+            ps.setDate(4, Date.valueOf(beneficiado.getDataNascimento()));
+            ps.setString(5, beneficiado.getEndereco());
+            ps.setInt(6, beneficiado.getNumero());
+            ps.setString(7, beneficiado.getCidade());
+            ps.setString(8, beneficiado.getBairro());
+            ps.setString(9, beneficiado.getDescricao());
+            ps.setInt(10, beneficiado.getId());
             ps.executeUpdate();
             ps.close();
             conn.close();
@@ -61,14 +61,14 @@ public class BeneficiarioDao {
         }
     }
 
-    public Beneficiario buscarPorId(int id) {
+    public Beneficiado buscarPorId(int id) {
         try {
             conn = ConexaoDb.getConnection();
-            String sql = "SELECT * FROM beneficiario b INNER JOIN usuario u ON b.id_usuario = u.id WHERE id = ?";
+            String sql = "SELECT * FROM beneficiado b INNER JOIN usuario u ON b.id_usuario = u.id WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            Beneficiario beneficiario = null;
+            Beneficiado beneficiado = null;
 
             while (rs.next()) {
                 Usuario usuario = new Usuario(rs.getInt(12),
@@ -80,7 +80,7 @@ public class BeneficiarioDao {
                         rs.getString(18),
                         Permissao.valueOf(rs.getString(19)));
 
-                beneficiario = new Beneficiario(rs.getInt(1), rs.getString(2),
+                beneficiado = new Beneficiado(rs.getInt(1), rs.getString(2),
                         rs.getString(3), rs.getString(4), rs.getDate(5).toLocalDate(), rs.getString(6),
                         rs.getInt(7), rs.getString(8), rs.getString(9),
                         rs.getString(10), usuario);
@@ -89,21 +89,21 @@ public class BeneficiarioDao {
             ps.close();
             conn.close();
 
-            return beneficiario;
+            return beneficiado;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public List<Beneficiario> buscarPorNome(String nome) {
+    public List<Beneficiado> buscarPorNome(String nome) {
 
         try {
             conn = ConexaoDb.getConnection();
-            String sql = "SELECT * FROM beneficiario b INNER JOIN usuario u ON b.id_usuario = u.id WHERE LOWER(nome) LIKE ?";
+            String sql = "SELECT * FROM beneficiado b INNER JOIN usuario u ON b.id_usuario = u.id WHERE LOWER(nome) LIKE ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, "%" + nome + "%");
             ResultSet rs = ps.executeQuery();
-            List<Beneficiario> listBeneficiarios = new ArrayList<>();
+            List<Beneficiado> listBeneficiados = new ArrayList<>();
 
             while (rs.next()) {
                 Usuario usuario = new Usuario(rs.getInt(12),
@@ -115,30 +115,30 @@ public class BeneficiarioDao {
                         rs.getString(18),
                         Permissao.valueOf(rs.getString(19)));
 
-                Beneficiario beneficiario = new Beneficiario(rs.getInt(1), rs.getString(2),
+                Beneficiado beneficiado = new Beneficiado(rs.getInt(1), rs.getString(2),
                         rs.getString(3), rs.getString(4), rs.getDate(5).toLocalDate(), rs.getString(6),
                         rs.getInt(7), rs.getString(8), rs.getString(9),
                         rs.getString(10), usuario);
-                listBeneficiarios.add(beneficiario);
+                listBeneficiados.add(beneficiado);
             }
 
             ps.close();
             conn.close();
 
-            return listBeneficiarios;
+            return listBeneficiados;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public List<Beneficiario> listar() {
+    public List<Beneficiado> listar() {
         try {
             conn = ConexaoDb.getConnection();
-            String sql = "SELECT * FROM beneficiario b INNER JOIN usuario u ON b.id_usuario = u.id";
+            String sql = "SELECT * FROM beneficiado b INNER JOIN usuario u ON b.id_usuario = u.id";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            List<Beneficiario> listBeneficiarios = new ArrayList<>();
+            List<Beneficiado> listBeneficiados = new ArrayList<>();
 
             while (rs.next()) {
                 Usuario usuario = new Usuario(rs.getInt(12),
@@ -150,17 +150,17 @@ public class BeneficiarioDao {
                         rs.getString(18),
                         Permissao.valueOf(rs.getString(19)));
 
-                Beneficiario beneficiario = new Beneficiario(rs.getInt(1), rs.getString(2),
+                Beneficiado beneficiado = new Beneficiado(rs.getInt(1), rs.getString(2),
                         rs.getString(3), rs.getString(4), rs.getDate(5).toLocalDate(), rs.getString(6),
                         rs.getInt(7), rs.getString(8), rs.getString(9),
                         rs.getString(10), usuario);
-                listBeneficiarios.add(beneficiario);
+                listBeneficiados.add(beneficiado);
             }
 
             ps.close();
             conn.close();
 
-            return listBeneficiarios;
+            return listBeneficiados;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -169,7 +169,7 @@ public class BeneficiarioDao {
     public void deletar(int id) {
         try {
             conn = ConexaoDb.getConnection();
-            String sql = "DELETE FROM beneficiario WHERE id = ?";
+            String sql = "DELETE FROM beneficiado WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ps.execute();

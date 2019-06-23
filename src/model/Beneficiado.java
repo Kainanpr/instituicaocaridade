@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
-public class Beneficiario {
+public class Beneficiado {
     private int id;
     private String nome;
     private String profissao;
@@ -15,11 +15,11 @@ public class Beneficiario {
     private String descricao;
     private Usuario usuario;
 
-    public Beneficiario() {
+    public Beneficiado() {
 
     }
 
-    public Beneficiario(int id, String nome, String profissao, String telefone, LocalDate dataNascimento, String endereco, int numero, String bairro, String cidade, String descricao, Usuario usuario) {
+    public Beneficiado(int id, String nome, String profissao, String telefone, LocalDate dataNascimento, String endereco, int numero, String bairro, String cidade, String descricao, Usuario usuario) {
         this.id = id;
         this.nome = nome;
         this.profissao = profissao;
@@ -33,7 +33,7 @@ public class Beneficiario {
         this.usuario = usuario;
     }
 
-    public Beneficiario(String nome, String profissao, String telefone, LocalDate dataNascimento, String endereco, int numero, String bairro, String cidade, String descricao, Usuario usuario) {
+    public Beneficiado(String nome, String profissao, String telefone, LocalDate dataNascimento, String endereco, int numero, String bairro, String cidade, String descricao, Usuario usuario) {
         this.nome = nome;
         this.profissao = profissao;
         this.telefone = telefone;
@@ -136,7 +136,7 @@ public class Beneficiario {
 
     @Override
     public String toString() {
-        return "Beneficiario{" +
+        return "Beneficiado{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", profissao='" + profissao + '\'' +
