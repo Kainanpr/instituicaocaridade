@@ -20,6 +20,8 @@ import model.ItemCesta;
 import org.controlsfx.control.textfield.TextFields;
 import service.AlimentoService;
 import service.BeneficiadoService;
+import service.CestaService;
+import service.ItemCestaService;
 import util.Alerta;
 
 import java.io.IOException;
@@ -36,6 +38,8 @@ public class MontarCestaController implements Initializable {
     private List<ItemCesta> listaItemCesta = new ArrayList<>();
     private AlimentoService alimentoService = new AlimentoService();
     private BeneficiadoService beneficiadoService = new BeneficiadoService();
+    private CestaService cestaService = new CestaService();
+    private ItemCestaService itemCestaService = new ItemCestaService();
     private ItemCesta itemCestaAdicionar = new ItemCesta();
     private ObservableList<ItemCesta> obsItemCesta;
 
@@ -164,12 +168,22 @@ public class MontarCestaController implements Initializable {
 
         if (listaItemCesta.size() == 0) {
             Alerta.abrirAlert("Erro", "Adicione um alimento para montar a cesta.", Alert.AlertType.ERROR);
-        } else if (cesta.getBeneficiado() == null){
+        } else if (cesta.getBeneficiado() == null) {
             Alerta.abrirAlert("Erro", "Adicione um beneficiado para montar a cesta.", Alert.AlertType.ERROR);
-        } else if (cesta.getDataDoacao() == null){
+        } else if (cesta.getDataDoacao() == null) {
             Alerta.abrirAlert("Erro", "Adicione a data de entrega para montar a cesta.", Alert.AlertType.ERROR);
         } else {
-            System.out.println("Salvando...");
+            int newCodCesta = cestaService.inserir(cesta);
+
+            cesta.setId(newCodCesta);
+            for (ItemCesta item : listaItemCesta) {
+                item.setCesta(cesta);
+            }
+
+            itemCestaService.inserir(listaItemCesta);
+
+            resetDepoisDeSalvar();
+            Alerta.abrirAlert("Cesta cadastrada", "Cesta cadastrada com sucesso.", Alert.AlertType.INFORMATION);
         }
     }
 
@@ -283,6 +297,19 @@ public class MontarCestaController implements Initializable {
     private void resetPaneAlimentos() {
         setPaneAlimentos(new Alimento(), "", "");
         itemCestaAdicionar = new ItemCesta();
+    }
+
+    private void resetPaneBeneficiado() {
+        setPaneBeneficiado("");
+        dataEntrega.setValue(null);
+    }
+
+    private void resetDepoisDeSalvar() {
+        resetPaneBeneficiado();
+        listaItemCesta = new ArrayList<>();
+        cesta = new Cesta();
+
+        atualizarListaItemCesta(listaItemCesta);
     }
 
     @Override
