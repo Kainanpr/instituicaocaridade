@@ -173,6 +173,27 @@ public class UsuarioDao {
             throw new RuntimeException(e);
         }
     }
+
+    public int newCodUsuario() {
+        try {
+            conn = ConexaoDb.getConnection();
+            String sql = "SELECT MAX(id) FROM usuario";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            Integer newCodUsuario = null;
+
+            while (rs.next()) {
+                newCodUsuario = rs.getInt(1);
+            }
+
+            ps.close();
+            conn.close();
+
+            return newCodUsuario;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 
 

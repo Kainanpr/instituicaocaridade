@@ -8,8 +8,10 @@ import java.util.List;
 public class UsuarioService {
     private UsuarioDao usuarioDao = new UsuarioDao();
 
-    public void inserir(Usuario usuario) {
+    public Usuario inserir(Usuario usuario) {
         usuarioDao.inserir(usuario);
+        int newCodUsuario = usuarioDao.newCodUsuario();
+        return usuarioDao.buscarPorId(newCodUsuario);
     }
 
     public List<Usuario> listar() {
