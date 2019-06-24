@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -106,8 +107,7 @@ public class MontarCestaController implements Initializable {
                 itemCestaAdicionar.setQuantidade(quantidade);
                 listaItemCesta.add(itemCestaAdicionar);
                 atualizarListaItemCesta(listaItemCesta);
-                setPaneAlimentos(new Alimento(), "");
-                itemCestaAdicionar = new ItemCesta();
+                resetPaneAlimentos();
             } else {
                 Alerta.abrirAlert("Erro", "Quantidade indisponível.", Alert.AlertType.ERROR);
             }
@@ -118,15 +118,14 @@ public class MontarCestaController implements Initializable {
 
     @FXML
     void handleClickCancelar(ActionEvent event) {
-        setPaneAlimentos(new Alimento(), "");
-        itemCestaAdicionar = new ItemCesta();
+        resetPaneAlimentos();
     }
 
     @FXML
     void handleClickExcluirDaCesta(ActionEvent event) {
         itemCestaSelecionado = tableItemCesta.getSelectionModel().getSelectedItem();
 
-        if (tableItemCesta == null) {
+        if (itemCestaSelecionado == null) {
             Alerta.abrirAlert("Erro", "Selecione um item para excluir.", Alert.AlertType.ERROR);
         } else {
             Alert alert = Alerta.confirmarAlert("Deseja excluir o item?", "Você tem certeza que deseja excluir este item?");
@@ -134,10 +133,23 @@ public class MontarCestaController implements Initializable {
 
             if (result.get() == ButtonType.OK) {
                 listaItemCesta.remove(itemCestaSelecionado);
+                resetPaneAlimentos();
             }
         }
 
         atualizarListaItemCesta(listaItemCesta);
+    }
+
+    @FXML
+    void handleClickLinha(MouseEvent event) {
+        itemCestaSelecionado = tableItemCesta.getSelectionModel().getSelectedItem();
+
+        if (itemCestaSelecionado != null) {
+            final Alimento alimentoSelecionado = itemCestaSelecionado.getAlimento();
+            final String quantidade = String.valueOf(itemCestaSelecionado.getQuantidade());
+
+            setPaneAlimentos(alimentoSelecionado, alimentoSelecionado.getNomeAlimento(), quantidade);
+        }
     }
 
     @FXML
@@ -206,15 +218,15 @@ public class MontarCestaController implements Initializable {
 
         if (alimentoAdicionar != null) {
             itemCestaAdicionar.setAlimento(alimentoAdicionar);
-            setPaneAlimentos(alimentoAdicionar, txtNomeAlimento);
+            setPaneAlimentos(alimentoAdicionar, txtNomeAlimento, "");
         } else {
-            setPaneAlimentos(new Alimento(), txtNomeAlimento);
+            setPaneAlimentos(new Alimento(), txtNomeAlimento, "");
         }
     }
 
-    private void setPaneAlimentos(Alimento alimento, String newTxtNomeAlimento) {
+    private void setPaneAlimentos(Alimento alimento, String newTxtNomeAlimento, String quantidade) {
         txtNomeAlimento.setText(newTxtNomeAlimento);
-        txtQuantidade.setText("");
+        txtQuantidade.setText(quantidade);
         txtQtdEstoque.setText(String.valueOf(alimento.getQtdEstoque()));
         dataValidade.setValue(alimento.getDataValidade());
     }
@@ -225,6 +237,11 @@ public class MontarCestaController implements Initializable {
         for (ItemCesta itemCesta : listaItemCesta) {
             obsItemCesta.add(itemCesta);
         }
+    }
+
+    private void resetPaneAlimentos() {
+        setPaneAlimentos(new Alimento(), "", "");
+        itemCestaAdicionar = new ItemCesta();
     }
 
     @Override

@@ -20,9 +20,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CadastroConsultaAlimentoController implements Initializable {
+    private Alimento alimentoSelecionado;
     private AlimentoService alimentoService = new AlimentoService();
     private ObservableList<Alimento> obsAlimentos;
     private ObservableList<Alimento> obsAlimentosVencidos;

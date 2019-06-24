@@ -72,7 +72,7 @@
                                 <Button fx:id="btnSalvarCesta" layoutX="330.0" layoutY="353.0" mnemonicParsing="false" onAction="#handleClickSalvarCesta" prefHeight="31.0" prefWidth="123.0" text="Salvar" />
                                 <Button fx:id="btnVoltar" layoutX="472.0" layoutY="353.0" mnemonicParsing="false" onAction="#handleClickVoltarMenu" prefHeight="31.0" prefWidth="105.0" text="Voltar" />
                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="365.0" layoutX="14.0" layoutY="27.0" stroke="#00000009" strokeType="INSIDE" width="294.0" />
-                                <TableView fx:id="tableItemCesta" layoutX="20.0" layoutY="47.0" prefHeight="337.0" prefWidth="278.0" />
+                                <TableView fx:id="tableItemCesta" layoutX="20.0" layoutY="47.0" onMouseClicked="#handleClickLinha" prefHeight="337.0" prefWidth="278.0" />
                                 <Label layoutX="31.0" layoutY="17.0" text="Lista de Alimentos">
                                     <font>
                                         <Font size="15.0" />
