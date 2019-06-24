@@ -136,18 +136,6 @@ public class Beneficiado {
 
     @Override
     public String toString() {
-        return "Beneficiado{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", profissao='" + profissao + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", endereco='" + endereco + '\'' +
-                ", numero=" + numero +
-                ", bairro='" + bairro + '\'' +
-                ", cidade='" + cidade + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", usuario=" + usuario +
-                '}';
+        return nome;
     }
 }

@@ -41,13 +41,18 @@ public class MontarCestaController implements Initializable {
     private CestaService cestaService = new CestaService();
     private ItemCestaService itemCestaService = new ItemCestaService();
     private ItemCesta itemCestaAdicionar = new ItemCesta();
-    private ObservableList<ItemCesta> obsItemCesta;
-
-    @FXML
-    private TableView<?> tableListaCesta;
+    private ObservableList<ItemCesta> obsItemCestaAdicionados;
+    private ObservableList<Cesta> obsListaCestaConsultar;
+    private ObservableList<ItemCesta> obsItemCestaConsultar;
 
     @FXML
     private TableView<ItemCesta> tableItemCesta;
+
+    @FXML
+    private TableView<Cesta> tableListaCestaConsultar;
+
+    @FXML
+    private TableView<ItemCesta> tableItemCestaConsultar;
 
     @FXML
     private Button btnAdicionarNaCesta;
@@ -161,6 +166,19 @@ public class MontarCestaController implements Initializable {
     }
 
     @FXML
+    void handleClickLinhaListaCesta(MouseEvent event) {
+        Cesta cestaSelecionada = tableListaCestaConsultar.getSelectionModel().getSelectedItem();
+
+        if (cestaSelecionada != null) {
+            List<ItemCesta> itemCestaConsultar = itemCestaService.listarPorIdDaCesta(cestaSelecionada.getId());
+
+            atualizarListaItemCestaConsultar(itemCestaConsultar);
+        } else {
+            atualizarListaItemCestaConsultar(new ArrayList<>());
+        }
+    }
+
+    @FXML
     void handleClickSalvarCesta(ActionEvent event) {
         final LocalDate dataDoacao = dataEntrega.getValue();
 
@@ -216,20 +234,54 @@ public class MontarCestaController implements Initializable {
     }
 
     private void configurarTableViewAdicionados() {
-        obsItemCesta = FXCollections.observableArrayList();
+        obsItemCestaAdicionados = FXCollections.observableArrayList();
 
         TableColumn<ItemCesta, Alimento> nome = new TableColumn<>("Nome");
         nome.setMinWidth(140);
 
-        TableColumn<ItemCesta, String> tipo = new TableColumn<>("Quantidade");
-        tipo.setMinWidth(100);
+        TableColumn<ItemCesta, String> quantidade = new TableColumn<>("Quantidade");
+        quantidade.setMinWidth(100);
 
-        tableItemCesta.getColumns().addAll(nome, tipo);
+        tableItemCesta.getColumns().addAll(nome, quantidade);
 
         nome.setCellValueFactory(new PropertyValueFactory<>("alimento"));
-        tipo.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+        quantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
 
-        tableItemCesta.setItems(obsItemCesta);
+        tableItemCesta.setItems(obsItemCestaAdicionados);
+    }
+
+    private void configurarTableViewListaCestaConsultar() {
+        obsListaCestaConsultar = FXCollections.observableArrayList();
+
+        TableColumn<Cesta, LocalDate> data = new TableColumn<>("Data de entrega");
+        data.setMinWidth(140);
+
+        TableColumn<Cesta, Beneficiado> beneficiado = new TableColumn<>("Beneficiado");
+        beneficiado.setMinWidth(100);
+
+        tableListaCestaConsultar.getColumns().addAll(data, beneficiado);
+
+        data.setCellValueFactory(new PropertyValueFactory<>("dataDoacao"));
+        beneficiado.setCellValueFactory(new PropertyValueFactory<>("beneficiado"));
+
+        tableListaCestaConsultar.setItems(obsListaCestaConsultar);
+    }
+
+    private void configurarTableViewItemCestaConsultar() {
+        obsItemCestaConsultar = FXCollections.observableArrayList();
+
+        TableColumn<ItemCesta, Alimento> nome = new TableColumn<>("Nome");
+        nome.setMinWidth(140);
+
+        TableColumn<ItemCesta, String> quantidade = new TableColumn<>("Quantidade");
+        quantidade.setMinWidth(100);
+
+        tableItemCestaConsultar.getColumns().addAll(nome, quantidade);
+
+        nome.setCellValueFactory(new PropertyValueFactory<>("alimento"));
+        quantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+
+        tableItemCestaConsultar.setItems(obsItemCestaConsultar);
     }
 
     private void configurarAutoCompleteAlimentos() {
@@ -287,10 +339,26 @@ public class MontarCestaController implements Initializable {
     }
 
     private void atualizarListaItemCesta(List<ItemCesta> listaItemCesta) {
-        obsItemCesta.clear();
+        obsItemCestaAdicionados.clear();
 
         for (ItemCesta itemCesta : listaItemCesta) {
-            obsItemCesta.add(itemCesta);
+            obsItemCestaAdicionados.add(itemCesta);
+        }
+    }
+
+    private void atualizarListaCestaConsultar(List<Cesta> listaCesta) {
+        obsListaCestaConsultar.clear();
+
+        for (Cesta cesta : listaCesta) {
+            obsListaCestaConsultar.add(cesta);
+        }
+    }
+
+    private void atualizarListaItemCestaConsultar(List<ItemCesta> listaItemCesta) {
+        obsItemCestaConsultar.clear();
+
+        for (ItemCesta itemCesta : listaItemCesta) {
+            obsItemCestaConsultar.add(itemCesta);
         }
     }
 
@@ -315,8 +383,11 @@ public class MontarCestaController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         configurarTableViewAdicionados();
+        configurarTableViewListaCestaConsultar();
+        configurarTableViewItemCestaConsultar();
         configurarAutoCompleteAlimentos();
         configurarAutoCompleteBeneciado();
+        atualizarListaCestaConsultar(cestaService.listar());
 
         txtNomeAlimento.textProperty().addListener((obs, oldText, newText) -> {
             handleChangeNomeAlimento(newText);

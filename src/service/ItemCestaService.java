@@ -13,4 +13,8 @@ public class ItemCestaService {
             itemCestaDao.inserir(item);
         }
     }
+
+    public List<ItemCesta> listarPorIdDaCesta(int id) {
+        return itemCestaDao.listarPorIdDaCesta(id);
+    }
 }
