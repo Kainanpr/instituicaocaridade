@@ -207,7 +207,12 @@ public class MontarCestaController implements Initializable {
 
     @FXML
     void handleClickPesquisarBeneficiado(ActionEvent event) {
+        final String nome = txtPesquisaCestaPorBeneficiado.getText();
 
+        List<Cesta> listaCestas = cestaService.buscarPorNomeDoBeneficiado(nome);
+
+        atualizarListaCestaConsultar(listaCestas);
+        atualizarListaItemCestaConsultar(new ArrayList<>());
     }
 
     @FXML

@@ -136,6 +136,7 @@ public class MenuPrincipalController implements Initializable {
         if (LoginController.usuarioLogado.getPermissao() == Permissao.DOADOR) {
             btnMenuUsuarios.setDisable(true);
             btnMenuFamilias.setDisable(true);
+            btnMenuMontarCesta.setDisable(true);
         }
     }
 }

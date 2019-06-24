@@ -17,4 +17,8 @@ public class CestaService {
     public List<Cesta> listar() {
         return cestaDao.listar();
     }
+
+    public List<Cesta> buscarPorNomeDoBeneficiado(String nome) {
+        return cestaDao.buscarPorNomeDoBeneficiado(nome);
+    }
 }
