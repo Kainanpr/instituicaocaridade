@@ -117,10 +117,23 @@ public class MontarCestaController implements Initializable {
 
 
             if (quantidade <= alimentoAdicionar.getQtdEstoque() && quantidade > 0) {
-                itemCestaAdicionar.setQuantidade(quantidade);
-                listaItemCesta.add(itemCestaAdicionar);
-                atualizarListaItemCesta(listaItemCesta);
-                resetPaneAlimentos();
+                boolean isExiste = false;
+                for (ItemCesta item : listaItemCesta) {
+                    if (item.getAlimento().getId() == itemCestaAdicionar.getAlimento().getId()) {
+                        isExiste = true;
+                        break;
+                    }
+                }
+
+                if (!isExiste) {
+                    itemCestaAdicionar.setQuantidade(quantidade);
+                    listaItemCesta.add(itemCestaAdicionar);
+                    atualizarListaItemCesta(listaItemCesta);
+                    resetPaneAlimentos();
+                } else {
+                    Alerta.abrirAlert("Erro", "Item já existe na cesta.", Alert.AlertType.ERROR);
+                }
+
             } else {
                 Alerta.abrirAlert("Erro", "Quantidade indisponível.", Alert.AlertType.ERROR);
             }
