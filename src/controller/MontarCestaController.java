@@ -201,6 +201,7 @@ public class MontarCestaController implements Initializable {
             itemCestaService.inserir(listaItemCesta);
 
             resetDepoisDeSalvar();
+            atualizarListaCestaConsultar(cestaService.listar());
             Alerta.abrirAlert("Cesta cadastrada", "Cesta cadastrada com sucesso.", Alert.AlertType.INFORMATION);
         }
     }
@@ -217,7 +218,9 @@ public class MontarCestaController implements Initializable {
 
     @FXML
     void handleClickResetLista(ActionEvent event) {
-
+        txtPesquisaCestaPorBeneficiado.setText("");
+        atualizarListaCestaConsultar(cestaService.listar());
+        atualizarListaItemCestaConsultar(new ArrayList<>());
     }
 
     @FXML

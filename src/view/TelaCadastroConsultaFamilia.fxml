@@ -42,9 +42,9 @@
                                            prefWidth="97.0"/>
                                 <TextArea fx:id="txtDescricao" layoutX="92.0" layoutY="242.0" prefHeight="59.0"
                                           prefWidth="420.0"/>
-                                <Button fx:id="btnSalvarBeneficiado" layoutX="346.0" layoutY="321.0"
+                                <Button fx:id="btnSalvarBeneficiado" layoutX="365.0" layoutY="312.0"
                                         mnemonicParsing="false" onAction="#handleClickSalvarBeneficiado" text="Salvar"/>
-                                <Button fx:id="btnVoltar" layoutX="452.0" layoutY="321.0" mnemonicParsing="false"
+                                <Button fx:id="btnVoltar" layoutX="452.0" layoutY="312.0" mnemonicParsing="false"
                                         onAction="#handleClickVoltarMenu" text="Voltar"/>
                             </children>
                             <effect>
@@ -57,13 +57,13 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="273.0" prefWidth="497.0">
                             <children>
-                                <Button fx:id="btnVoltar" layoutX="411.0" layoutY="297.0" mnemonicParsing="false"
+                                <Button fx:id="btnVoltar" layoutX="409.0" layoutY="294.0" mnemonicParsing="false"
                                         onAction="#handleClickVoltarMenu" prefHeight="50.0" prefWidth="100.0"
                                         text="Voltar"/>
-                                <Button fx:id="btnExcluirBeneficiado" layoutX="129.0" layoutY="297.0"
+                                <Button fx:id="btnExcluirBeneficiado" layoutX="171.0" layoutY="294.0"
                                         mnemonicParsing="false" onAction="#handleClickExcluirBeneficiado"
                                         prefHeight="50.0" prefWidth="100.0" text="Excluir"/>
-                                <Button fx:id="btnAtualizarBeneficiado" layoutX="264.0" layoutY="297.0"
+                                <Button fx:id="btnAtualizarBeneficiado" layoutX="291.0" layoutY="294.0"
                                         mnemonicParsing="false" onAction="#handleClickAtualizarBeneficiado"
                                         prefHeight="50.0" prefWidth="100.0" text="Atualizar"/>
                                 <Label layoutX="11.0" layoutY="31.0" text="Nome do Beneficiado"/>
@@ -73,22 +73,8 @@
                                         onAction="#handleClickPesquisarBeneficiado" text="Pesquisar"/>
                                 <TableView fx:id="tableListaBeneficiado" layoutX="11.0" layoutY="81.0"
                                            prefHeight="200.0" prefWidth="505.0"/>
-                                <Button fx:id="btnHistoricoBeneficiado" layoutX="14.0" layoutY="297.0"
-                                        mnemonicParsing="false" onAction="#handleClickHistoricoBeneficiado"
-                                        prefHeight="50.0" prefWidth="100.0" text="Histórico"/>
                                 <Button fx:id="btnResetLista" layoutX="459.0" layoutY="27.0" mnemonicParsing="false"
                                         onAction="#handleClickResetLista" text="Reset"/>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab fx:id="tabHistoricoCestas" text="Histórico de Cestas">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="273.0" prefWidth="497.0">
-                            <children>
-                                <Button fx:id="btnVoltar" layoutX="452.0" layoutY="321.0" mnemonicParsing="false"
-                                        onAction="#handleClickVoltarMenu" text="Voltar"/>
-                                <TableView layoutX="14.0" layoutY="34.0" prefHeight="273.0" prefWidth="503.0"/>
                             </children>
                         </AnchorPane>
                     </content>

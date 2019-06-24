@@ -86,14 +86,10 @@ public class CadastroConsultaFamiliaController implements Initializable {
     private TextField txtCidade;
 
     @FXML
-    private Button btnHistoricoBeneficiado;
-
-    @FXML
     private Tab tabCadastrarBeneficiado;
 
     @FXML
     private TextField txtBairro;
-
 
     @FXML
     void handleClickSalvarBeneficiado(ActionEvent event) {

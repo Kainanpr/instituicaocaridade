@@ -46,7 +46,7 @@
         </Button>
         <Accordion/>
         <Button fx:id="btnMenuMontarCesta" layoutX="31.0" layoutY="100.0" mnemonicParsing="false"
-                onAction="#HandleClickMontarCesta" prefHeight="74.0" prefWidth="276.0" text="Montar Cesta"
+                onAction="#HandleClickMontarCesta" prefHeight="74.0" prefWidth="276.0" text="Montar e Consultar Cesta"
                 textAlignment="CENTER" wrapText="true">
             <font>
                 <Font name="Tahoma" size="18.0"/>
