@@ -132,6 +132,46 @@ public class BeneficiadoDao {
         }
     }
 
+    public Beneficiado buscarPorNomeCompleto(String nome) {
+
+        try {
+            conn = ConexaoDb.getConnection();
+            String sql = "SELECT * FROM beneficiado b INNER JOIN usuario u ON b.id_usuario = u.id WHERE nome LIKE ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, nome);
+            ResultSet rs = ps.executeQuery();
+            List<Beneficiado> listBeneficiados = new ArrayList<>();
+
+            while (rs.next()) {
+                Usuario usuario = new Usuario(rs.getInt(12),
+                        rs.getString(13),
+                        rs.getString(14),
+                        rs.getString(15),
+                        rs.getString(16),
+                        rs.getString(17),
+                        rs.getString(18),
+                        Permissao.valueOf(rs.getString(19)));
+
+                Beneficiado beneficiado = new Beneficiado(rs.getInt(1), rs.getString(2),
+                        rs.getString(3), rs.getString(4), rs.getDate(5).toLocalDate(), rs.getString(6),
+                        rs.getInt(7), rs.getString(8), rs.getString(9),
+                        rs.getString(10), usuario);
+                listBeneficiados.add(beneficiado);
+            }
+
+            ps.close();
+            conn.close();
+
+            if (listBeneficiados.size() > 0) {
+                return listBeneficiados.get(0);
+            }
+
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<Beneficiado> listar() {
         try {
             conn = ConexaoDb.getConnection();

@@ -24,6 +24,10 @@ public class BeneficiadoService {
         return beneficiadoDao.buscarPorNome(nome);
     }
 
+    public Beneficiado buscarPorNomeCompleto(String nome) {
+        return beneficiadoDao.buscarPorNomeCompleto(nome);
+    }
+
     public void atualizar(Beneficiado beneficiado) {
         beneficiadoDao.atualizar(beneficiado);
     }

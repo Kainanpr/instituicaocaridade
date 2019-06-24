@@ -19,19 +19,23 @@ import model.Cesta;
 import model.ItemCesta;
 import org.controlsfx.control.textfield.TextFields;
 import service.AlimentoService;
+import service.BeneficiadoService;
 import util.Alerta;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MontarCestaController implements Initializable {
+    private Cesta cesta = new Cesta();
     private ItemCesta itemCestaSelecionado;
     private List<ItemCesta> listaItemCesta = new ArrayList<>();
     private AlimentoService alimentoService = new AlimentoService();
+    private BeneficiadoService beneficiadoService = new BeneficiadoService();
     private ItemCesta itemCestaAdicionar = new ItemCesta();
     private ObservableList<ItemCesta> obsItemCesta;
 
@@ -154,7 +158,19 @@ public class MontarCestaController implements Initializable {
 
     @FXML
     void handleClickSalvarCesta(ActionEvent event) {
+        final LocalDate dataDoacao = dataEntrega.getValue();
 
+        cesta.setDataDoacao(dataDoacao);
+
+        if (listaItemCesta.size() == 0) {
+            Alerta.abrirAlert("Erro", "Adicione um alimento para montar a cesta.", Alert.AlertType.ERROR);
+        } else if (cesta.getBeneficiado() == null){
+            Alerta.abrirAlert("Erro", "Adicione um beneficiado para montar a cesta.", Alert.AlertType.ERROR);
+        } else if (cesta.getDataDoacao() == null){
+            Alerta.abrirAlert("Erro", "Adicione a data de entrega para montar a cesta.", Alert.AlertType.ERROR);
+        } else {
+            System.out.println("Salvando...");
+        }
     }
 
     @FXML
@@ -213,6 +229,17 @@ public class MontarCestaController implements Initializable {
         TextFields.bindAutoCompletion(txtNomeAlimento, nomesAlimentos);
     }
 
+    private void configurarAutoCompleteBeneciado() {
+        final List<Beneficiado> listaBeneficiados = beneficiadoService.listar();
+        final List<String> nomesBeneficiados = new ArrayList<>();
+
+        for (Beneficiado beneficiado : listaBeneficiados) {
+            nomesBeneficiados.add(beneficiado.getNome());
+        }
+
+        TextFields.bindAutoCompletion(txtNomeBeneficiado, nomesBeneficiados);
+    }
+
     private void handleChangeNomeAlimento(String txtNomeAlimento) {
         Alimento alimentoAdicionar = alimentoService.buscarPorNome(txtNomeAlimento);
 
@@ -224,11 +251,25 @@ public class MontarCestaController implements Initializable {
         }
     }
 
+    private void handleChangeNomeBeneficiado(String txtNomeBeneficiado) {
+        Beneficiado beneficiadoAdicionar = beneficiadoService.buscarPorNomeCompleto(txtNomeBeneficiado);
+
+        if (beneficiadoAdicionar != null) {
+            cesta.setBeneficiado(beneficiadoAdicionar);
+        }
+
+        setPaneBeneficiado(txtNomeBeneficiado);
+    }
+
     private void setPaneAlimentos(Alimento alimento, String newTxtNomeAlimento, String quantidade) {
         txtNomeAlimento.setText(newTxtNomeAlimento);
         txtQuantidade.setText(quantidade);
         txtQtdEstoque.setText(String.valueOf(alimento.getQtdEstoque()));
         dataValidade.setValue(alimento.getDataValidade());
+    }
+
+    private void setPaneBeneficiado(String nome) {
+        txtNomeBeneficiado.setText(nome);
     }
 
     private void atualizarListaItemCesta(List<ItemCesta> listaItemCesta) {
@@ -248,9 +289,14 @@ public class MontarCestaController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         configurarTableViewAdicionados();
         configurarAutoCompleteAlimentos();
+        configurarAutoCompleteBeneciado();
 
         txtNomeAlimento.textProperty().addListener((obs, oldText, newText) -> {
             handleChangeNomeAlimento(newText);
+        });
+
+        txtNomeBeneficiado.textProperty().addListener((obs, oldText, newText) -> {
+            handleChangeNomeBeneficiado(newText);
         });
     }
 }
