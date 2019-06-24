@@ -41,7 +41,7 @@ public class LoginController {
             if (login.equals("admin") && senha.equals("admin")) {
                 final Usuario usuario = new Usuario("Administrador", "", "", "", "admin", "admin", Permissao.ADMINISTRADOR);
                 usuarioLogado = usuarioService.inserir(usuario);
-                Alerta.abrirAlert("Primeiro acesso", "Usuário administrador cadastrado com sucesso.", Alert.AlertType.INFORMATION);
+                Alerta.abrirAlert("Primeiro acesso com usuário Admin", "Usuário administrador cadastrado com sucesso.", Alert.AlertType.INFORMATION);
                 abrirTelaMenuPrincipal();
             } else {
                 Alerta.abrirAlert("Erro", "Usuário ou senha inválidos.", Alert.AlertType.ERROR);
